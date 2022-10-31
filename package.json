@@ -1,0 +1,26 @@
+{
+  "name": "company-cli-db",
+  "version": "1.0.0",
+  "description": "command-line app to store and edit company payroll",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DraconMarius/Company-CLI-DB.git"
+  },
+  "author": "Mari K Ma",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DraconMarius/Company-CLI-DB/issues"
+  },
+  "homepage": "https://github.com/DraconMarius/Company-CLI-DB#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4",
+    "mysql2": "^2.2.5"
+  }
+}

@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS payroll_db;
+CREATE DATABASE payroll_db;
