@@ -1,5 +1,5 @@
 /*
-- [ ] Needs options: "view all departments", "view all roles", 
+- [X] Needs options: "view all departments", "view all roles", 
     "view all employees", "add a department",  "add a role", 
     "add an employee", and "update an employee role"
 - [ ] "View all departments": formatted table showing department names and department ids
@@ -26,6 +26,7 @@ const { printTable } = require('console-table-printer');
 const { choices, viewAllDept, viewAllEmp, viewAllRole } = require("./lib/QandA");
 const intro = "select the following:";
 
+
 //connecting to the mySQL server, please edit line 31 to provide a specific password
 //or put "" if no password defined;
 //more more info: https://www.npmjs.com/package/mysql2
@@ -48,8 +49,38 @@ function init() {
                 name: "chosen",
             },
         ]).then((answers) => {
-            console.log(answers.chosen)
+            console.log(answers.chosen);
+            // console.log(choices[9]);
+            const chosen = answers.chosen;
+            //added a end program option
+            if (chosen === choices[9]) {
+                console.log("Thank you and visit again", '\n', 'Use Ctrl-C to end the program');
+            } else {
+                selectedOption(answers);
+            }
+            return chosen;
+        }).then((chosen) => {
+            if (chosen !== choices[9]) {
+                init();
+            };
         });
+};
+
+//swithc statement that depends on chosen option in init
+function selectedOption(answers) {
+    switch (answers.chosen) {
+        case "View All Department":
+            viewAllDept(connection);
+            break;
+
+        case "View All Roles":
+            viewAllRole(connection);
+            break;
+
+        case "View All Employee":
+            viewAllEmp(connection);
+            break;
+    };
 };
 
 init();
