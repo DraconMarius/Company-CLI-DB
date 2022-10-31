@@ -2,9 +2,9 @@
 - [X] Needs options: "view all departments", "view all roles", 
     "view all employees", "add a department",  "add a role", 
     "add an employee", and "update an employee role"
-- [ ] "View all departments": formatted table showing department names and department ids
-- [ ] "View all roles": job title, role id, the department that role belongs to, and the salary for that role
-- [ ] "View all employees": formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
+- [X] "View all departments": formatted table showing department names and department ids
+- [X] "View all roles": job title, role id, the department that role belongs to, and the salary for that role
+- [X] "View all employees": formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
 - [ ] "Add a department": prompt to enter the name and that department is added to the database
 - [ ] "Add a role": prompt to enter the name, salary, and department for the role and that added to the database
 - [ ] "Add an employee": prompt to enter the employee’s first name, last name, role, and manager, and added to the database
@@ -23,7 +23,7 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const { printTable } = require('console-table-printer');
 //importing from lib
-const { choices, viewAllDept, viewAllEmp, viewAllRole } = require("./lib/QandA");
+const { choices, viewAllDept, viewAllEmp, viewAllRole, addDept } = require("./lib/QandA");
 const intro = "select the following:";
 
 
@@ -50,35 +50,60 @@ function init() {
             },
         ]).then((answers) => {
             console.log(answers.chosen);
-            // console.log(choices[9]);
+            // console.log(choices[10]);
             const chosen = answers.chosen;
+
             //added a end program option
-            if (chosen === choices[9]) {
+            if (chosen === choices[10]) {
                 console.log("Thank you and visit again", '\n', 'Use Ctrl-C to end the program');
-            } else {
+                return;
+            } else if (chosen !== choices[10]) {
                 selectedOption(answers);
             }
-            return chosen;
-        }).then((chosen) => {
-            if (chosen !== choices[9]) {
-                init();
-            };
         });
 };
 
 //swithc statement that depends on chosen option in init
 function selectedOption(answers) {
     switch (answers.chosen) {
-        case "View All Department":
+        case choices[0]:
             viewAllDept(connection);
+            init();
             break;
-
-        case "View All Roles":
+        case choices[1]:
             viewAllRole(connection);
+            init();
             break;
-
-        case "View All Employee":
+        case choices[2]:
             viewAllEmp(connection);
+            init();
+            break;
+        case choices[3]:
+            addDept(connection);
+            init();
+            break;
+        case choices[4]:
+            init();
+            break;
+        case choices[5]:
+            addEmp(connection, answers);
+            init();
+            break;
+        case choices[6]:
+            updateEmpRole(connection, answers);
+            init();
+            break;
+        case choices[7]:
+            updateEmpMngr(connection, answers);
+            init();
+            break;
+        case choices[8]:
+            viewEmpByDept(connection, answers);
+            init();
+            break;
+        case choices[9]:
+            viewEmpByMngr(connection, answers);
+            init();
             break;
     };
 };
