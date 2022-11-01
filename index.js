@@ -5,9 +5,9 @@
 - [X] "View all departments": formatted table showing department names and department ids
 - [X] "View all roles": job title, role id, the department that role belongs to, and the salary for that role
 - [X] "View all employees": formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
-- [ ] "Add a department": prompt to enter the name and that department is added to the database
-- [ ] "Add a role": prompt to enter the name, salary, and department for the role and that added to the database
-- [ ] "Add an employee": prompt to enter the employee’s first name, last name, role, and manager, and added to the database
+- [X] "Add a department": prompt to enter the name and that department is added to the database
+- [X] "Add a role": prompt to enter the name, salary, and department for the role and that added to the database
+- [X] "Add an employee": prompt to enter the employee’s first name, last name, role, and manager, and added to the database
 - [ ] "Update an employee role": prompted to select an employee to update and their new role and this information is updated in the database 
 BONUS
 - [ ] "Update employee managers"
@@ -23,7 +23,7 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const { printTable } = require('console-table-printer');
 //importing from lib
-const { choices, viewAllDept, viewAllEmp, viewAllRole, addDept } = require("./lib/QandA");
+const { choices, viewAllDept, viewAllEmp, viewAllRole, addDept, addRole, addEmp, updateEmpRole } = require("./lib/QandA");
 const intro = "select the following:";
 
 
@@ -83,54 +83,6 @@ function init() {
                 choices: choices,
                 name: "chosen",
             },
-            // {
-            //     type: "input",
-            //     message: "What do you want to call the new department?",
-            //     name: "deptName",
-            //     when: (answers) => {
-            //         if (answers.chosen === choices[3]) {
-            //             return true;
-            //         }
-            //     },
-            //     validate(answer) {
-            //         if (!answer) {
-            //             return "Your Department name cannot be blank"
-            //         }
-            //         return true
-            //     }
-            // },
-            // {
-            //     type: "input",
-            //     message: "What do you want to call the new position",
-            //     name: "roleTitle",
-            //     when: (answers) => {
-            //         if (answers.chosen === choices[4]) {
-            //             return true;
-            //         }
-            //     },
-            //     validate(answer) {
-            //         if (!answer) {
-            //             return "Your new role's name cannot be blank"
-            //         }
-            //         return true
-            //     }
-            // },
-            // {
-            //     type: "input",
-            //     message: "What would be the salary for this new role in USD?",
-            //     name: "roleUSD",
-            //     when: (answers) => {
-            //         if (answers.chosen === choices[4]) {
-            //             return true;
-            //         }
-            //     },
-            //     validate(answer) {
-            //         if (!answer || (isNaN(answer))) {
-            //             return "Your Department name cannot be blank && a valid number"
-            //         }
-            //         return true
-            //     }
-            // },
         ]).then((answers) => {
             console.log(answers.chosen);
             // console.log(choices[10]);
@@ -139,10 +91,10 @@ function init() {
             // inquirer.prompt.ui.close();
             // return ("test1");
             // added a end program option
-            if (chosen === choices[10]) {
+            if (chosen === choices[7]) {
                 console.log("Thank you and visit again", '\n', 'Use Ctrl-C to end the program');
                 return;
-            } else if (chosen !== choices[10]) {
+            } else if (chosen !== choices[7]) {
                 selectedOption(connection, answers);
             };
         });
@@ -152,35 +104,36 @@ function init() {
 function selectedOption(connection, answers) {
     switch (answers.chosen) {
         case choices[0]:
-            viewAllDept(connection);
+            viewAllDept(connection, init);
             break;
         case choices[1]:
-            viewAllRole(connection);
+            viewAllRole(connection, init);
             break;
         case choices[2]:
-            viewAllEmp(connection);
+            viewAllEmp(connection, init);
             break;
         case choices[3]:
             addDept(connection, init);
             break;
         case choices[4]:
-            addRole(connection);
+            addRole(connection, init);
             break;
         case choices[5]:
-            addEmp(connection, answers);
+            addEmp(connection, init);
             break;
         case choices[6]:
-            updateEmpRole(connection, answers);
+            updateEmpRole(connection, init);
             break;
-        case choices[7]:
-            updateEmpMngr(connection, answers);
-            break;
-        case choices[8]:
-            viewEmpByDept(connection, answers);
-            break;
-        case choices[9]:
-            viewEmpByMngr(connection, answers);
-            break;
+        //to be implemented
+        // case choices[7]:
+        //     updateEmpMngr(connection, init);
+        //     break;
+        // case choices[8]:
+        //     viewEmpByDept(connection, init);
+        //     break;
+        // case choices[9]:
+        //     viewEmpByMngr(connection, init);
+        //     break;
     };
 };
 
