@@ -87,7 +87,7 @@ function init() {
             console.log(answers.chosen);
             // console.log(choices[10]);
             const chosen = answers.chosen;
-            console.log(answers.deptName);
+            // console.log(answers.deptName);
             // inquirer.prompt.ui.close();
             // return ("test1");
             // added a end program option
