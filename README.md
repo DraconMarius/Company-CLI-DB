@@ -4,7 +4,7 @@
 ***
 A simple commanline application that 
 
-[Live Video Link](https://google.com)
+[Live Video Link](https://drive.google.com/file/d/1kz-yhW_2QoKaDa76LzY5Hex6a_Eef7A3/view)
 
 ***
 - [X] Needs options: "view all departments", "view all roles", 
@@ -16,7 +16,7 @@ A simple commanline application that
 - [X] "Add a department": prompt to enter the name and that department is added to the database
 - [X] "Add a role": prompt to enter the name, salary, and department for the role and that added to the database
 - [X] "Add an employee": prompt to enter the employee’s first name, last name, role, and manager, and added to the database
-- [ ] "Update an employee role": prompted to select an employee to update and their new role and this information is updated in the database 
+- [X] "Update an employee role": prompted to select an employee to update and their new role and this information is updated in the database 
 
 ***
 ## Installation & Usage
@@ -49,7 +49,7 @@ node index.js
 ***
 ## Demo Links / Media
 *(feel free to click on the gif to go to the video DEMO)*
-[<img src="./Assets/JOT-demo.gif" alt='Video DEMO'>](https://jot-notation-app.herokuapp.com) 
+[<img src="./Assets/demo.gif" alt='Video DEMO'>](https://drive.google.com/file/d/1kz-yhW_2QoKaDa76LzY5Hex6a_Eef7A3/view) 
 
 ## Technologies Used
 > JavaScript
