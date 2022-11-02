@@ -23,7 +23,7 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const { printTable } = require('console-table-printer');
 //importing from lib
-const { choices, viewAllDept, viewAllEmp, viewAllRole, addDept, addRole, addEmp, updateEmpRole } = require("./lib/QandA");
+const { choices, viewAllDept, viewAllEmp, viewAllRole, addDept, addRole, addEmp, updateEmpRole, updateEmpMngr } = require("./lib/QandA");
 const intro = "select the following:";
 
 
@@ -40,6 +40,7 @@ const connection = mysql.createConnection({
 );
 
 //originally wanted to get current payroll info for validation reasons;
+//**BUT** would not work due sync
 // let depts = [];
 // let roles = [];
 // let employees = [];
@@ -91,10 +92,10 @@ function init() {
             // inquirer.prompt.ui.close();
             // return ("test1");
             // added a end program option
-            if (chosen === choices[7]) {
+            if (chosen === choices[8]) {
                 console.log("Thank you and visit again", '\n', 'Use Ctrl-C to end the program');
                 return;
-            } else if (chosen !== choices[7]) {
+            } else if (chosen !== choices[8]) {
                 selectedOption(connection, answers);
             };
         });
@@ -125,9 +126,9 @@ function selectedOption(connection, answers) {
             updateEmpRole(connection, init);
             break;
         //to be implemented
-        // case choices[7]:
-        //     updateEmpMngr(connection, init);
-        //     break;
+        case choices[7]:
+            updateEmpMngr(connection, init);
+            break;
         // case choices[8]:
         //     viewEmpByDept(connection, init);
         //     break;
